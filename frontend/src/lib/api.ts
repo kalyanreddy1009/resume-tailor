@@ -11,6 +11,12 @@ export interface TailorResponse {
   resume: string;
 }
 
+export async function checkHealth(): Promise<{ status: string; agy_installed: boolean }> {
+  const res = await fetch(`${API_URL.replace("/api", "")}/api/health`);
+  if (!res.ok) throw new Error("Health check failed");
+  return res.json();
+}
+
 export async function getMasterResume(): Promise<string> {
   const res = await fetch(`${API_URL}/resume/`);
   if (!res.ok) throw new Error("Failed to fetch master resume");

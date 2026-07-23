@@ -18,14 +18,18 @@ app.include_router(resume.router, prefix="/api/resume", tags=["resume"])
 app.include_router(tailor.router, prefix="/api/tailor", tags=["tailor"])
 app.include_router(export.router, prefix="/api/export", tags=["export"])
 
+agy_installed = False
+
 @app.on_event("startup")
 async def startup_event():
+    global agy_installed
     # Check if agy is installed
     try:
-        subprocess.run(["agy", "--version"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    except (FileNotFoundError, subprocess.CalledProcessError):
+        subprocess.run(["cmd", "/c", "agy --version"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        agy_installed = True
+    except Exception:
         print("WARNING: agy CLI not found or failed to run. Ensure agy is installed and in PATH.")
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok"}
+    return {"status": "ok", "agy_installed": agy_installed}
