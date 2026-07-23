@@ -3,8 +3,9 @@ from pydantic import BaseModel
 from pathlib import Path
 from services.parser import parse_document
 
+from config import WORKSPACE_DIR
+
 router = APIRouter()
-WORKSPACE_DIR = Path("C:/Users/Masan/resume-tailor/workspace")
 MASTER_RESUME_PATH = WORKSPACE_DIR / "master_resume.md"
 
 class MasterResumeContent(BaseModel):

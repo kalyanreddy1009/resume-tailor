@@ -3,8 +3,9 @@ from pydantic import BaseModel
 from services.agy_runner import run_tailor_pipeline
 from pathlib import Path
 
+from config import WORKSPACE_DIR
+
 router = APIRouter()
-WORKSPACE_DIR = Path("C:/Users/Masan/resume-tailor/workspace")
 STATUS_FILE = WORKSPACE_DIR / "status.txt"
 
 class TailorRequest(BaseModel):
