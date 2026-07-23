@@ -4,7 +4,8 @@ import json
 import subprocess
 from pathlib import Path
 
-WORKSPACE_DIR = Path("C:/Users/Masan/resume-tailor/workspace")
+from config import WORKSPACE_DIR
+
 LOCK = asyncio.Lock()
 
 async def run_tailor_pipeline(job_description: str, custom_instructions: str = ""):
